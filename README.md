@@ -1,2 +1,2 @@
-# launchbase-front-end
-launchbase-front-end
+# launchbase-intro-js
+launchbase-intro-js
