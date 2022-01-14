@@ -1,54 +1,94 @@
-//criar um progama que calcule a média 
-//das tumas de alunos e enviar
-//mensagemdo cálculo da média.
 
-const alunos_da_Turma_A = [
+const aluno_A = [
   {
-    nome: "mayk",
-    nota: 9.8
+    name: "mayk",
+    grade: 9.8
   },
   {
-    nome: "diego",
-    nota: 10
+    name: "diego",
+    grade: 10
   },
   {
-    nome: "fulano",
-    nota: 2
+    name: "fulano",
+    grade: 2
   },
-  ]
+  {
+    name: 'mais um aluno',
+    grade: 10
+  },
+]
 
-  const alunos_da_Turma_B = [
+const  aluno_B = [
   {
-    nome: "cleiton",
-    nota: 10
+    name: "cleiton",
+    grade: 10
   },
   {
-    nome: "robson",
-    nota: 10
+    name: "robson",
+    grade: 10
   },
   {
-    nome: "roberto",
-    nota: 2
+    name: "roberto",
+    grade: 2
   },
-  ]
+  {
+    name: 'novo aluno',
+    grade: 5
+  },
+]
 
-  function calculaMedia(alunos) {
-    return (alunos[0].nota + alunos[1].nota + alunos[2].nota)/3
+function calculateAverage(alunos) {
+
+
+  let sum = 0;
+  for (let i = 0; i < alunos.length; i++) {
+    sum = sum + alunos[i].grade
   }
 
-  const media1 = calculaMedia(alunos_da_Turma_A);
-  const media2 = calculaMedia(alunos_da_Turma_B);
- 
+  const average = sum / alunos.length;
+  return average
+}
+
+const average1 = calculateAverage(aluno_A);
+const average2 = calculateAverage(aluno_B);
 
 
-function enviar_Mensagem(media, turma){
-    //se a média for maior que 5, parabenizar a turma
-  if (media > 5) {
-    console.log(`A media da turma ${turma}foi de ${media}.parabéns`)
-  }else {
-    console.log(`A média da turma ${turma} é menor que 5`)
+
+function send_message(average, turma) {
+
+  if (average > 5) {
+    console.log(` ${turma}avarage: ${average}. congrats`)
+  } else {
+    console.log(`${turma} ${average} is not good.`)
   }
 }
 
-enviar_Mensagem(media1,'turmaA')
-enviar_Mensagem(media2,'turmaB')
+send_message(average1, 'turmaA')
+send_message(average2, 'turmaB')
+
+
+function mark_as_fluked(alunos) {
+  alunos.fluked = false;
+  if (alunos.grade < 5) {
+    alunos.fluked = true;
+  }
+
+}
+
+
+function send_message_fluked(alunos) {
+  if (alunos.fluked) {
+    console.log(`o aluno ${alunos.name} está fluked!`)
+  }
+
+}
+
+function alunos_flukeds(alunos) {
+  for (let aluno of alunos) {
+    mark_as_fluked(aluno);
+    send_message_fluked(aluno)
+  }
+}
+
+alunos_flukeds(aluno_A)
+alunos_flukeds(aluno_B)
